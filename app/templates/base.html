@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BookShare{% endblock %}</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+     <!-- Fixed Header -->
+    <header class="top-0 left-0 w-full shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="{{ url_for('dashboard.main') }}" class="text-xl font-bold">BookShare</a>
+        <a href="/user/profile">
+            <div class="flex items-center border-dashed px-2 py-1
+                        border border-gray-500 hover:border-black hover:border-4
+                        rounded-xl" >
+                <span class="font-bold">{{ username[0].upper() }}</span>
+            </div>
+        </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-4 container mx-auto px-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
+

@@ -5,4 +5,7 @@ db = SQLAlchemy()
 
 # Import all models here
 from .user import User
-#from .post import Post  # Example for another model
+from .library import Library
+from .book import Book
+from .lending import Lending
+from .friendship import Friendship

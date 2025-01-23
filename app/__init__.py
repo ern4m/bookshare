@@ -2,6 +2,11 @@ from flask_login import LoginManager
 from flask import Flask
 from .models import db, User
 
+# Register blueprints
+from .auth import auth as auth_blueprint
+from .main import main as main_blueprint
+from .dashboard import dashboard as dashboard_blueprint
+
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 
@@ -17,11 +22,8 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
 
-
-    # Register blueprints
-    from .main import main as main_blueprint
-    from .auth import auth as auth_blueprint
     app.register_blueprint(main_blueprint)
+    app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
     return app

@@ -33,3 +33,10 @@ def libraries():
 
     return render_template('libraries.html', username=user.username)
 
+@dashboard.route('/borrowings')
+@login_required
+def borrowings():
+    user = User.query.get(current_user.id)
+
+    #return render_template('libraries.html', username=user.username)
+    return f"Hello, {user.username}! Welcome to your borrowings."

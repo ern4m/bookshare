@@ -6,6 +6,9 @@ from .models import db, User
 from .auth import auth as auth_blueprint
 from .main import main as main_blueprint
 from .dashboard import dashboard as dashboard_blueprint
+from .library import library as library_blueprint
+from .book import book as book_blueprint
+from .profile import profile as profile_blueprint
 
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
@@ -24,6 +27,9 @@ def create_app():
 
     app.register_blueprint(main_blueprint)
     app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
+    app.register_blueprint(library_blueprint, url_prefix='/library')
+    app.register_blueprint(book_blueprint, url_prefix='/book')
+    app.register_blueprint(profile_blueprint, url_prefix='/profile')
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
     return app

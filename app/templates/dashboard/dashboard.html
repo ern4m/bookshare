@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex flex-col gap-2">
+    <!-- My Libraries Section -->
+    <div class="sm:w-1/2 shadow rounded-lg sm:py-2">
+        <h2 class="transition duration-200 transform hover:scale-110
+                   bg-white hover:bg-blue
+                   text-lg font-semibold mb-4">
+          <a href="{{ url_for('dashboard.libraries') }}">
+            > Bibliotecas
+          </a>
+        </h2>
+    </div>
+
+    <!-- Borrowings Section -->
+    <div class="sm:w-1/2 shadow rounded-lg sm:py-2">
+        <h2 class="transition duration-200 transform hover:scale-110
+                   bg-white hover:bg-blue
+                   text-lg font-semibold mb-4">
+          <a href="{{ url_for('dashboard.borrowings') }}">
+            > Empréstimos
+          </a>
+        </h2>
+    </div>
+
+    <!-- New Books Section -->
+    <div class="sm:w-1/2 shadow rounded-lg sm:py-2">
+        <h2 class="transition duration-200 transform hover:scale-110
+                   bg-white hover:bg-blue
+                   text-lg font-semibold mb-4">
+          > Adicionados Recentemente
+        </h2>
+    </div>
+</div>
+{% endblock %}

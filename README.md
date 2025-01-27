@@ -15,4 +15,7 @@ EECP0036 - Desenvolvimento de Sistemas Web (2024.2)
 - Requisitos:
     - todo
 - Instruções:
-    - todo
+    - Substitua `SECRET_KEY` em `config.py` por uma chave segura.
+    - Crie um ambiente virtual e ative ele
+    - Instale as dependencias `pip install -r requirements.txt`
+    - Inicie o projeto com `python3 run.py`

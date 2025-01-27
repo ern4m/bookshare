@@ -18,7 +18,7 @@ def main():
                                    Book.lending_id == None,  # Not lent
                                    Book.is_lent == False,    # Not lent
                                    Book.id > 0).all()
-    return render_template('dashboard.html',
+    return render_template('dashboard/dashboard.html',
                            libraries=libraries,
                            borrowings=borrowings,
                            lendings=lendings,
@@ -31,12 +31,11 @@ def main():
 def libraries():
     user = User.query.get(current_user.id)
 
-    return render_template('libraries.html', username=user.username)
+    return render_template('dashboard/libraries.html', username=user.username)
 
 @dashboard.route('/borrowings')
 @login_required
 def borrowings():
     user = User.query.get(current_user.id)
 
-    #return render_template('libraries.html', username=user.username)
-    return f"Hello, {user.username}! Welcome to your borrowings."
+    return render_template('dashboard/borrowings.html', username=user.username)

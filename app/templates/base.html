@@ -9,16 +9,27 @@
 <body>
      <!-- Fixed Header -->
     <header class="top-0 left-0 w-full shadow-md">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <!-- App Name -->
         <a href="{{ url_for('dashboard.main') }}" class="text-xl font-bold">BookShare</a>
-        <a href="/user/profile">
+
+        <!-- Profile -->
+        <div class="group relative cursor-pointer">
+          <a href="/user/profile">
             <div class="flex items-center border-dashed px-2 py-1
                         border border-gray-500 hover:border-black hover:border-4
-                        rounded-xl" >
-                <span class="font-bold">{{ username[0].upper() }}</span>
+                        rounded-xl">
+              <span class="menu-hover font-bold">{{ username[0].upper() }}</span>
             </div>
-        </a>
+          </a>
+          <div
+            class="invisible absolute z-50 flex w-full flex-col bg-gray-100 py-1 px-4 text-gray-800 shadow-xl group-hover:visible">
+            <a class="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500">
+              Sunday
+            </a>
+          </div>
         </div>
+      </div>
     </header>
 
     <!-- Main Content -->
@@ -26,6 +37,19 @@
         {% block content %}
         {% endblock %}
     </main>
+
+    <!-- Footer -->
+    <footer class="text-black py-4 mt-6">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                © 2025 BookShare. All rights reserved.
+            </p>
+            <div class="mt-2">
+                <a href="/privacy" class="hover:underline text-sm mr-4">Link 1</a>
+                <a href="/terms" class="hover:underline text-sm">Link 2</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 

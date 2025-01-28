@@ -5,75 +5,82 @@
 {% block content %}
 <section class="section">
     <div class="container">
-        <!-- Cabeçalho da Biblioteca -->
-        <div class="level">
-            <div class="level-left">
-                <h2 class="title is-4">{{ library.name }}</h2>
-            </div>
-            <div class="level-right">
-                <!-- Botão para Editar Nome -->
-                <a href="{{ url_for('library.edit', library_id=library.id) }}" class="button is-info is-small">
-                    <span class="icon"><i class="fas fa-edit"></i></span>
-                    <span>Editar Nome</span>
-                </a>
+        <!-- Verifica se a biblioteca existe -->
+        {% if library %}
+            <!-- Cabeçalho da Biblioteca -->
+            <div class="level">
+                <div class="level-left">
+                    <h2 class="title is-4">{{ library.name }}</h2>
+                </div>
+                <div class="level-right">
+                    <!-- Botão para Editar Nome -->
+                    <a href="{{ url_for('library.edit', library_id=library.id) }}" class="button is-info is-small">
+                        <span class="icon"><i class="fas fa-edit"></i></span>
+                        <span>Editar Nome</span>
+                    </a>
 
-                <!-- Botão para Apagar Biblioteca -->
-                <form action="{{ url_for('library.delete', library_id=library.id) }}" method="post" class="ml-3">
-                    <button type="submit" class="button is-danger is-small">
-                        <span class="icon"><i class="fas fa-trash"></i></span>
-                        <span>Excluir Biblioteca</span>
-                    </button>
-                </form>
+                    <!-- Botão para Apagar Biblioteca -->
+                    <form action="{{ url_for('library.delete', library_id=library.id) }}" method="post" class="ml-3">
+                        <button type="submit" class="button is-danger is-small">
+                            <span class="icon"><i class="fas fa-trash"></i></span>
+                            <span>Excluir Biblioteca</span>
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
 
-        <!-- Lista de Livros -->
-        <div class="box mt-4">
-            <h3 class="subtitle is-5">Livros</h3>
-            <table class="table is-fullwidth is-hoverable">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Título</th>
-                        <th>Autor</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <!-- Lista de Livros -->
+            <div class="box mt-4">
+                <h3 class="subtitle is-5">Livros</h3>
+                <div class="columns is-multiline">
                     {% for book in library.books %}
-                        <tr>
-                            <td>{{ loop.index }}</td>
-                            <td>{{ book.title }}</td>
-                            <td>{{ book.author }}</td>
-                            <td>
-                                <!-- Botão para Editar Livro -->
-                                <a href="{{ url_for('book.edit', book_id=book.id) }}" class="button is-small is-info">
-                                    <span class="icon"><i class="fas fa-edit"></i></span>
-                                </a>
-                                <!-- Botão para Excluir Livro -->
-                                <form action="{{ url_for('book.delete', book_id=book.id) }}" method="post" class="is-inline-block">
-                                    <button type="submit" class="button is-small is-danger">
-                                        <span class="icon"><i class="fas fa-trash"></i></span>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+                        <div class="column is-one-third">
+                            <div class="card">
+                                <header class="card-header">
+                                    <p class="card-header-title">{{ book.title }}</p>
+                                </header>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <p><strong>Autor:</strong> {{ book.author }}</p>
+                                    </div>
+                                </div>
+                                <footer class="card-footer">
+                                    <!-- Botão para Editar Livro -->
+                                    <a href="{{ url_for('book.edit', book_id=book.id) }}" class="card-footer-item has-text-info">
+                                        <span class="icon"><i class="fas fa-edit"></i></span>
+                                        <span>Editar</span>
+                                    </a>
+                                    <!-- Botão para Excluir Livro -->
+                                    <form action="{{ url_for('book.delete', book_id=book.id) }}" method="post" class="card-footer-item">
+                                        <button type="submit" class="button is-text has-text-danger">
+                                            <span class="icon"><i class="fas fa-trash"></i></span>
+                                            <span>Excluir</span>
+                                        </button>
+                                    </form>
+                                </footer>
+                            </div>
+                        </div>
                     {% else %}
-                        <tr>
-                            <td colspan="4" class="has-text-centered">Nenhum livro encontrado.</td>
-                        </tr>
+                        <div class="column is-12">
+                            <p class="has-text-centered">Nenhum livro encontrado.</p>
+                        </div>
                     {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                </div>
+            </div>
 
-        <!-- Botão para Adicionar Livro -->
-        <div class="has-text-right">
-            <a href="{{ url_for('book.add', library_id=library.id) }}" class="button is-primary">
-                <span class="icon"><i class="fas fa-plus"></i></span>
-                <span>Adicionar Livro</span>
-            </a>
-        </div>
+            <!-- Botão para Adicionar Livro -->
+            <div class="has-text-right">
+                <a href="{{ url_for('book.add', library_id=library.id) }}" class="button is-primary">
+                    <span class="icon"><i class="fas fa-plus"></i></span>
+                    <span>Adicionar Livro</span>
+                </a>
+            </div>
+        {% else %}
+            <!-- Mensagem caso a biblioteca não exista -->
+            <div class="notification is-danger">
+                A biblioteca solicitada não foi encontrada.
+            </div>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

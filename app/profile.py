@@ -16,4 +16,4 @@ def main():
     #                       new_books=new_books,
     #                       username=user.username)
 
-    return f"Hello, {user.username}! Welcome to your profile."
+    return render_template('profile.html', username=user.username, user=user)

@@ -1,55 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}BookShare{% endblock %}</title>
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
-     <!-- Fixed Header -->
-    <header class="top-0 left-0 w-full shadow-md">
-      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <!-- App Name -->
-        <a href="{{ url_for('dashboard.main') }}" class="text-xl font-bold">BookShare</a>
-
-        <!-- Profile -->
-        <div class="group relative cursor-pointer">
-          <a href="/user/profile">
-            <div class="flex items-center border-dashed px-2 py-1
-                        border border-gray-500 hover:border-black hover:border-4
-                        rounded-xl">
-              <span class="menu-hover font-bold">{{ username[0].upper() }}</span>
-            </div>
-          </a>
-          <div
-            class="invisible absolute z-50 flex w-full flex-col bg-gray-100 py-1 px-4 text-gray-800 shadow-xl group-hover:visible">
-            <a class="my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500">
-              Sunday
-            </a>
-          </div>
+<!-- Fixed Header -->
+<header class="navbar is-fixed-top has-shadow ">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="{{ url_for('dashboard.main') }}" class="navbar-item has-text-weight-bold is-size-4">BookShare</a>
         </div>
-      </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="pt-4 container mx-auto px-4">
-        {% block content %}
-        {% endblock %}
-    </main>
-
-    <!-- Footer -->
-    <footer class="text-black py-4 mt-6">
-        <div class="container mx-auto text-center">
-            <p class="text-sm">
-                © 2025 BookShare. All rights reserved.
-            </p>
-            <div class="mt-2">
-                <a href="/privacy" class="hover:underline text-sm mr-4">Link 1</a>
-                <a href="/terms" class="hover:underline text-sm">Link 2</a>
+        <div class="navbar-end">
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">{{ username[0].upper() }}</a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item">Sunday</a>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="section ">
+    <div class="container ">
+        <div class="columns mt-5">
+
+<!-- Sidebar -->
+<aside class="column is-one-fifth">
+    <nav class="menu">
+        <!-- Menu Principal -->
+        <p class="menu-label">Menu</p>
+        <ul class="menu-list">
+            <li>
+                <a href="{{ url_for('dashboard.libraries') }}">
+                    <i class="fa-solid fa-book mr-5"></i>Bibliotecas
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('dashboard.borrowings') }}">
+                    <i class="fa-solid fa-handshake mr-5"></i>Empréstimos
+                </a>
+            </li>
+        </ul>
+
+        <!-- Espaço para empurrar os itens finais -->
+        <div style="margin-top: auto;"></div>
+
+        <!-- Itens Finais -->
+        <p class="menu-label mt-6">Configurações</p>
+        <ul class="menu-list">
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-user mr-5"></i>Perfil
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-arrow-right-from-bracket mr-5"></i>Sair
+                </a>
+            </li>
+        </ul>
+    </nav>
+</aside>
+
+
+
+            <!-- Main Content Area -->
+            <div class="column">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>© 2025 BookShare. All rights reserved.</p>
+        <p>
+            <a href="/privacy">Link 1</a> | <a href="/terms">Link 2</a>
+        </p>
+    </div>
+</footer>
 </body>
 </html>
-

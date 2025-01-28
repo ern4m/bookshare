@@ -16,4 +16,4 @@ def main(lib_id):
     #                       new_books=new_books,
     #                       username=user.username)
 
-    return f"Hello, {user.username}! - Biblioteca: {lib_id}"
+    return render_template('libraries/books/library_books.html', username=user.username)

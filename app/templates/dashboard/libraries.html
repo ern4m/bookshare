@@ -1,56 +1,71 @@
 {% extends "base.html" %}
 
-{% block title %}My Libraries{% endblock %}
+{% block title %}Minhas Bibliotecas{% endblock %}
 
 {% block content %}
-<h2 class="text-lg font-bold mb-6">Bibliotecas</h2>
+<section class="section">
+    <div class="container">
+        <h2 class="title is-4 mb-6">Bibliotecas</h2>
+        <div class="columns">
+            <!-- Coluna "Suas" -->
+            <div class="column">
+                <h3 class="subtitle is-5 has-text-weight-semibold">Suas</h3>
+                <div class="columns is-multiline">
+                    {% for id in range(10) %}
+                        <div class="column is-half">
+                            <div class="box has-shadow">
+                                <a href="{{ url_for('library.main', lib_id=id) }}">
+                                    <h5 class="title is-6">{{ "Teste" }}</h5>
+                                    <p class="content is-small">Descrição: Teste</p>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-<div class="grid grid-cols-2 gap-4 sm:gap-6">
-    <!-- Biblioteca de Teste -->
-    <div>
-      <h3 class="font-medium text-gray-700">Suas</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {% for id in range(10) %}
-          <div class="bg-white shadow rounded-lg py-2
-                      hover:border-red-400 hover:border-b-4">
-            <a href="{{ url_for('library.main', lib_id=id) }}" class="">
-              <h5 class="text-sm sm:text-lg font-medium text-gray-800">Teste</h5>
-              <p class="text-xs sm:text-sm text-gray-600">Descrição: Teste</p>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-    <div>
-      <h3 class="font-medium text-gray-700">De Amigos</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {% for id in range(10) %}
-          <div class="bg-white shadow rounded-lg py-2 hover:border hover:border-b-4">
-            <a href="{{ url_for('library.main', lib_id=id) }}" class="">
-              <h5 class="text-sm sm:text-lg font-medium text-gray-800">Teste</h5>
-              <p class="text-xs sm:text-sm text-gray-600">Descrição: Teste</p>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-    <!-- Loop de Bibliotecas -->
-    {% for library in libraries %}
-    <div class="bg-white shadow rounded-lg p-4">
-        <h5 class="text-lg font-medium text-gray-800">{{ library.name }}</h5>
-        <p class="text-sm text-gray-600">Books: {{ library.books|length }}</p>
-        <a href="/library/{{ library.id }}" class="mt-2 inline-block bg-gray-800 text-white px-4 py-2 rounded text-sm hover:bg-gray-900">
-            View Library
-        </a>
-    </div>
-    {% endfor %}
-</div>
+            <!-- Coluna "De Amigos" -->
+            <div class="column">
+                <h3 class="subtitle is-5 has-text-weight-semibold">De Amigos</h3>
+                <div class="columns is-multiline">
+                    {% for id in range(10) %}
+                        <div class="column is-half">
+                            <div class="box has-shadow">
+                                <a href="{{ url_for('library.main', lib_id=id) }}">
+                                    <h5 class="title is-6">{{ "Teste" }}</h5>
+                                    <p class="content is-small">Descrição: Teste</p>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
 
-<!-- Botão de Adicionar Nova Biblioteca -->
-<div class="flex flex-row-reverse my-6">
-    <button class="py-2 px-4 bg-black text-white">
-      +
-    </button>
-</div>
+        <!-- Loop de Bibliotecas -->
+        <div class="columns is-multiline">
+            {% for library in libraries %}
+                <div class="column is-one-third">
+                    <div class="box has-shadow">
+                        <h5 class="title is-6">{{ library.name }}</h5>
+                        <p class="content is-small">Livros: {{ library.books|length }}</p>
+                        <a href="/library/{{ library.id }}" class="button is-dark is-small mt-2">
+                            Ver Biblioteca
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Botão de Adicionar Nova Biblioteca -->
+        <div class="has-text-right mt-6">
+            <a href="/library/add" class="button is-primary is-rounded is-medium">
+                <span class="icon">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span>Adicionar Biblioteca</span>
+            </a>
+        </div>
+    </div>
+</section>
 {% endblock %}
-

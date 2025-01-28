@@ -9,11 +9,6 @@ library = Blueprint('library', __name__)
 def main(lib_id):
     user = User.query.get(current_user.id)
 
-    #return render_template('library.html',
-    #                       libraries=libraries,
-    #                       borrowings=borrowings,
-    #                       lendings=lendings,
-    #                       new_books=new_books,
-    #                       username=user.username)
-
-    return render_template('libraries/books/library_books.html', username=user.username)
+    return render_template('dashboard/library.html', 
+                            username=user.username,
+                            library_name="Nome da Biblioteca")

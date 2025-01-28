@@ -30,15 +30,14 @@ def register():
         password = request.form.get('password')
 
         if User.query.filter_by(username=username).first():
-            flash('Username already exists.', 'danger')
+            flash('Username already exists.', 'is-warning')
         elif User.query.filter_by(email=email).first():
-            flash('Email already exists.', 'danger')
+            flash('Email already exists.', 'is-warning')
         else:
             hashed_password = generate_password_hash(password)
             new_user = User(username=username, email=email, password=hashed_password)
             db.session.add(new_user)
             db.session.commit()
-            flash('Account created successfully! Please log in.', 'success')
             return redirect(url_for('auth.login'))
 
     return render_template('auth/register.html')

@@ -4,5 +4,5 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return redirect(url_for('auth.login'))
+    return render_template('landing_page.html')
 

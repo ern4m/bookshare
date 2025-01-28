@@ -1,11 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BookShare</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blabla</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
-
+    <section class="hero is-primary is-fullheight">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                        <form action="{{ url_for('login') }}" method="post" class="box">
+                            <div class="field">
+                                <label  class="label">Usuário</label>
+                                <div class="control has-icons-left">
+                                    <input type="text" name="username" placeholder="ex. johndoe@gmail.com" class="input" required>
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Senha</label>
+                                <div class="control has-icons-left">
+                                    <input type="password" name="password" placeholder="*******" class="input" required>
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label  class="checkbox">
+                                    <input type="checkbox">
+                                    Lembrar de mim
+                                </label>
+                            </div>
+                            <div class="field">
+                                <button class="button is-success is-fullwidth">
+                                    Login
+                                </button>
+                            </div>
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %}
+                                    {% for category, message in messages %}
+                                        <div class="notification is-{{ 'success' if category == 'success' else 'danger' }}">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

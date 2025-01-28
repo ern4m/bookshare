@@ -1,6 +1,86 @@
-<form method="POST">
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <button type="submit">Register</button>
-</form>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+<h2 class="has-text-centered mb-4 is-size-3 has-text-weight-bold ">BookShare</h2>
+<section class="section is-relative is-clipped has-background-primary"
+>
+
+
+    <div class="container mx-auto is-relative ">
+        <div class="is-vcentered ">
+            <div class="box has-background-light has-text-centered">
+                <form method="POST">
+                    <h3 class="mb-5 is-size-4 has-text-weight-bold">Cadastro</h3>
+                    <p class="mb-5 is-size-6 ">Crie sua conta e comece a compartilhar seus livros com amigos,
+                        facilitando empréstimos e expandindo o acesso à leitura em sua rede.</p>
+                    <div class="field">
+                        <div class="is-vcentered columns is-multiline">
+
+                            <div class=" control column is-5 is-5-desktop ">
+                                <input class="input" type="text" placeholder="Nome">
+                            </div>
+                            <div class="control column is-5 is-7-desktop ">
+                                <input class="input" type="text" placeholder="Sobrenome">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="email" name="email" placeholder="Seu melhor E-mail" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="text" name="username" placeholder="Nome de usuário" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="password" name="password" placeholder="Senha" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="password" placeholder="Confirmação de senha">
+                        </div>
+                    </div>
+                    <button class="button is-primary mb-4 is-fullwidth" type="submit">Cadastrar-se</button>
+                    <a class="mb-4 is-inline-block" href="#"><small>Esqueceu a senha?</small></a>
+                    <a class="button is-white mb-2 is-flex is-justify-content-center is-align-items-center is-fullwidth"
+                       href="#">
+                            <span class="icon is-medium">
+                                <i class="fa-brands fa-github"></i>
+                            </span>
+                        <span class="has-text-grey-dark">Entre com @redesocial</span>
+                    </a>
+                    <a class="button is-white mb-2 is-flex is-justify-content-center is-align-items-center is-fullwidth"
+                       href="#">
+                            <span class="icon is-medium">
+                                <i class="fa-brands fa-google"></i>
+                            </span>
+                        <span class="has-text-grey-dark">Entre com @redesocial</span>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
+
+<!--<form method="POST">-->
+<!--    <input type="text" name="username" placeholder="Username" required>-->
+<!--    <input type="email" name="email" placeholder="Email" required>-->
+<!--    <input type="password" name="password" placeholder="Password" required>-->
+<!--    <button type="submit">Register</button>-->
+<!--</form>-->

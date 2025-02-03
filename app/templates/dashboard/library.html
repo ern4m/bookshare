@@ -8,10 +8,33 @@
         <!-- Título da Biblioteca -->
         <h2 class="title is-4 mb-6">{{ library_name }}</h2>
 
+        <div class="field columns">
+            <div class="column is-10">
+                <p class="control has-icons-right ">
+                <input class="input is-rounded" type="text" placeholder="Busque por títulos, autores ou gênero.."/>
+                <span class="icon is-small is-right">
+                                <i class="fas fa-search"></i>
+                            </span>
+            </p>
+            </div>
+            <div class="column is-2">
+                <a href="#" class="button is-primary is-rounded ">
+                <span class="icon">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span>Adicionar Livro</span>
+            </a>
+            </div>
+
+
+        </div>
+
+
+
         <!-- Grid para os Gêneros -->
         <div class="columns is-multiline">
             <!-- Livros de Ficção -->
-            <div class="column is-half">
+            <div class="column is-12">
                 <h3 class="subtitle is-5 has-text-weight-semibold">Ficção</h3>
                 <div class="box">
                     <ul>
@@ -24,13 +47,14 @@
                                         <p class="is-size-7 has-text-grey">Autor: Autor{{ book }}</p>
                                         <p class="is-size-7 has-text-grey">Gênero: Ficção</p>
                                     </div>
-                                    <div class="column is-2  is-flex is-align-self-flex-right">
+                                    <div class="column has-text-right ">
                                         <!-- Ações: Editar e Deletar -->
-                                        <a href="#" class="button is-small is-info mr-3">
+                                        <a href="#" class="button is-small is-info mr-1 has-text-right">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="#" class="button is-small is-danger" onclick="return confirm('Tem certeza que deseja excluir este livro?')">
-                                            <i class="fas fa-trash"></i>                                        </a>
+                                        <a href="#" class="button is-small is-danger has-text-right"
+                                           onclick="return confirm('Tem certeza que deseja excluir este livro?')">
+                                            <i class="fas fa-trash"></i> </a>
                                     </div>
                                 </div>
                             </li>
@@ -41,7 +65,7 @@
             </div>
 
             <!-- Livros de Não Ficção -->
-            <div class="column is-half">
+            <div class="column is-12">
                 <h3 class="subtitle is-5 has-text-weight-semibold">Não Ficção</h3>
                 <div class="box">
                     <ul>
@@ -54,14 +78,14 @@
                                         <p class="is-size-7 has-text-grey">Autor: Autor{{ book }}</p>
                                         <p class="is-size-7 has-text-grey">Gênero: Não Ficção</p>
                                     </div>
-                                    <div class="column is-2  is-flex is-align-self-flex-right ">
+                                    <div class="column has-text-right ">
                                         <!-- Ações: Editar e Deletar -->
-                                        <a href="#" class="button is-small is-info mr-3">
+                                        <a href="#" class="button is-small is-info mr-1 has-text-right">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="#" class="button is-small is-danger" onclick="return confirm('Tem certeza que deseja excluir este livro?')">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
+                                        <a href="#" class="button is-small is-danger has-text-right"
+                                           onclick="return confirm('Tem certeza que deseja excluir este livro?')">
+                                            <i class="fas fa-trash"></i> </a>
                                     </div>
                                 </div>
                             </li>

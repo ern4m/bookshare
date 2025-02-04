@@ -9,69 +9,103 @@
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        /* Custom CSS to handle sidebar toggling */
+        @media screen and (max-width: 1023px) {
+            #sidebar {
+                display: none; /* Hide sidebar by default on medium/small screens */
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 250px;
+                z-index: 100;
+                background-color: white;
+                overflow-y: auto;
+                box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            }
+            #sidebar.is-active {
+                display: block; /* Show sidebar when active */
+            }
+            #overlay {
+                display: none; /* Overlay to close sidebar when clicking outside */
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 99;
+            }
+            #overlay.is-active {
+                display: block; /* Show overlay when sidebar is active */
+            }
+        }
+    </style>
 </head>
 <body>
 <!-- Fixed Header -->
-<header class="navbar is-fixed-top has-shadow ">
+<header class="navbar is-fixed-top has-shadow">
     <div class="container">
         <div class="navbar-brand">
-            <a href="{{ url_for('dashboard.main') }}" class="navbar-item has-text-weight-bold is-size-4">BookShare</a>
+            <a href="{{ url_for('dashboard.libraries') }}" class="navbar-item has-text-weight-bold is-size-4">BookShare</a>
+            <!-- Hamburger Button -->
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="sidebar">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
         </div>
-        <div class="navbar-end">
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">{{ username[0].upper() }}</a>
-                <div class="navbar-dropdown">
-                    <a class="navbar-item">Sunday</a>
-                </div>
-            </div>
-        </div>
+        <!-- <div class="navbar-end">
+            <a class="navbar-item">{{ username[0].upper() }}</a>
+        </div> -->
     </div>
 </header>
 
+<!-- Overlay for closing sidebar -->
+<div id="overlay"></div>
+
 <!-- Main Content -->
-<main class="section ">
-    <div class="container ">
+<main class="section">
+    <div class="container">
         <div class="columns mt-5">
+            <!-- Sidebar -->
+            <aside class="column is-one-fifth" id="sidebar">
+                <nav class="menu">
+                    <!-- Menu Principal -->
+                    <p class="menu-label">Menu</p>
+                    <ul class="menu-list">
+                        <li>
+                            <a href="{{ url_for('dashboard.libraries') }}">
+                                <i class="fa-solid fa-book mr-5"></i>Bibliotecas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('dashboard.borrowings') }}">
+                                <i class="fa-solid fa-handshake mr-5"></i>Empréstimos
+                            </a>
+                        </li>
+                    </ul>
 
-<!-- Sidebar -->
-<aside class="column is-one-fifth">
-    <nav class="menu">
-        <!-- Menu Principal -->
-        <p class="menu-label">Menu</p>
-        <ul class="menu-list">
-            <li>
-                <a href="{{ url_for('dashboard.libraries') }}">
-                    <i class="fa-solid fa-book mr-5"></i>Bibliotecas
-                </a>
-            </li>
-            <li>
-                <a href="{{ url_for('dashboard.borrowings') }}">
-                    <i class="fa-solid fa-handshake mr-5"></i>Empréstimos
-                </a>
-            </li>
-        </ul>
+                    <!-- Espaço para empurrar os itens finais -->
+                    <div style="margin-top: auto;"></div>
 
-        <!-- Espaço para empurrar os itens finais -->
-        <div style="margin-top: auto;"></div>
-
-        <!-- Itens Finais -->
-        <p class="menu-label mt-6">Configurações</p>
-        <ul class="menu-list">
-            <li>
-                <a href="{{ url_for('profile.main') }}">
-                    <i class="fa-solid fa-user mr-5"></i>Perfil
-                </a>
-            </li>
-            <li>
-                <a href="{{ url_for('auth.logout') }}">
-                    <i class="fa-solid fa-arrow-right-from-bracket mr-5"></i>Sair
-                </a>
-            </li>
-        </ul>
-    </nav>
-</aside>
-
-
+                    <!-- Itens Finais -->
+                    <p class="menu-label mt-6">Configurações</p>
+                    <ul class="menu-list">
+                        <li>
+                            <a href="{{ url_for('profile.main') }}">
+                                <i class="fa-solid fa-user mr-5"></i>Perfil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('auth.logout') }}">
+                                <i class="fa-solid fa-arrow-right-from-bracket mr-5"></i>Sair
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
 
             <!-- Main Content Area -->
             <div class="column">
@@ -91,5 +125,29 @@
         </p>
     </div>
 </footer>
+
+<!-- JavaScript to handle sidebar toggling -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Get the hamburger button, sidebar, and overlay
+        const navbarBurger = document.querySelector('.navbar-burger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        // Toggle sidebar and overlay
+        navbarBurger.addEventListener('click', () => {
+            navbarBurger.classList.toggle('is-active');
+            sidebar.classList.toggle('is-active');
+            overlay.classList.toggle('is-active');
+        });
+
+        // Close sidebar when clicking outside (on overlay)
+        overlay.addEventListener('click', () => {
+            navbarBurger.classList.remove('is-active');
+            sidebar.classList.remove('is-active');
+            overlay.classList.remove('is-active');
+        });
+    });
+</script>
 </body>
 </html>

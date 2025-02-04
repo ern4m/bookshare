@@ -5,19 +5,43 @@
 {% block content %}
 <section class="section">
     <div class="container">
-        <h2 class="title is-4 mb-6">Empréstimos</h2>
+
+        <div class="field columns">
+            <div class="column is-10">
+                <h2 class="title is-4 mb-6">Empréstimos</h2>
+            </div>
+            <div class="column is-2">
+                <a href="#" class="button is-primary is-rounded is-small ">
+                <span class="icon">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span>Adicionar um empréstimo</span>
+            </a>
+            </div>
+
+
+        </div>
         <div class="columns">
             <!-- Seus Empréstimos -->
             <div class="column">
-                <h3 class="subtitle is-5 has-text-weight-semibold">Seus</h3>
+                <h3 class="subtitle is-5 has-text-weight-semibold">Meus livros emprestados</h3>
                 <div class="box">
                     <ul>
                         {% for borrowing in range(4) %}
-                            <li class="media mb-4">
+                            <li class="media mb-5">
                                 <div class="media-content">
-                                    <p class="title is-6">{{ "Teste" }}</p>
-                                    <p class="subtitle is-7 has-text-grey">De: userX</p>
-                                    <p class="subtitle is-7 has-text-grey">Data: dayX</p>
+                                    <p class="title is-6">{{ "Nome do livro" }}</p>
+                                    <div class="columns">
+                                        <div class="column is-10 ">
+                                        <p class=" is-size-7 has-text-grey">De: userX</p>
+                                    <p class=" is-size-7 has-text-grey">Data: dayX</p>
+                                    </div>
+                                        <div class="column is-2">
+
+
+                                    </div>
+                                    </div>
+
                                 </div>
                             </li>
                         {% endfor %}
@@ -27,7 +51,17 @@
 
             <!-- Empréstimos de Amigos -->
             <div class="column">
-                <h3 class="subtitle is-5 has-text-weight-semibold">De Amigos</h3>
+                <h3 class="subtitle is-5 has-text-weight-semibold">Livros de amigos</h3>
+                <div class="field has-addons">
+  <p class="control">
+    <input class="input" type="text" placeholder="Buscar livro">
+  </p>
+  <p class="control">
+    <a class="button is-static">
+      Pedir emprestado
+    </a>
+  </p>
+</div>
                 <div class="box">
                     <ul>
                         {% for borrowing in range(4) %}
@@ -44,15 +78,7 @@
             </div>
         </div>
 
-        <!-- Botão de Registrar Novo Empréstimo -->
-        <div class="has-text-right mt-6">
-            <a href="/borrowing/add" class="button is-primary is-rounded is-medium">
-                <span class="icon">
-                    <i class="fas fa-plus"></i>
-                </span>
-                <span>Registrar Empréstimo</span>
-            </a>
-        </div>
+
     </div>
 </section>
 {% endblock %}

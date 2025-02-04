@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Book - {{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2 class="title is-4 mb-6">Edit Book: {{ book.title }}</h2>
+
+  <div class="box p-5">
+    <form method="POST" action="{{ url_for('book.update', book_id=book.id) }}">
+      <!-- Title Field -->
+      <div class="field">
+        <label class="label">Title</label>
+        <div class="control">
+          <input class="input" type="text" name="title" value="{{ book.title }}" required>
+        </div>
+      </div>
+
+      <!-- Author Field -->
+      <div class="field">
+        <label class="label">Author</label>
+        <div class="control">
+          <input class="input" type="text" name="author" value="{{ book.author }}" required>
+        </div>
+      </div>
+
+      <!-- Genre Field -->
+      <div class="field">
+        <label class="label">Genre</label>
+        <div class="control">
+          <input class="input" type="text" name="genre" value="{{ book.genre }}" required>
+        </div>
+      </div>
+
+      <!-- Published Date Field -->
+      <div class="field">
+        <label class="label">Published Date</label>
+        <div class="control">
+          <input class="input" type="date" name="published_date" value="{{ book.published_date }}" required>
+        </div>
+      </div>
+
+      <!-- Description Field -->
+      <div class="field">
+        <label class="label">Description</label>
+        <div class="control">
+          <textarea class="textarea" name="description" rows="5" required>{{ book.description }}</textarea>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="field is-grouped mt-5">
+        <div class="control">
+          <button type="submit" class="button is-primary">Save Changes</button>
+        </div>
+        <div class="control">
+          <a href="{{ url_for('book.get', book_id=book.id) }}" class="button is-light">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

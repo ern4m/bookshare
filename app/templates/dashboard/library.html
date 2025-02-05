@@ -40,7 +40,7 @@
                 <div class="box">
                     <ul>
                         {% for book in range(4) %}
-                        <a href="#">
+                        <a href="{{ url_for('book.get', book_id=0) }}">
                             <li class="p-3 mb-3 box is-clickable">
                                 <div class="columns is-mobile is-vcentered ">
                                     <div class="column is-12">
@@ -48,14 +48,23 @@
                                         <p class="is-size-7 has-text-grey">Autor: Autor{{ book }}</p>
                                         <p class="is-size-7 has-text-grey">Gênero: Ficção</p>
                                     </div>
-                                    <div class="column has-text-right ">
-                                        <!-- Ações: Editar e Deletar -->
-                                        <a href="#" class="button is-small is-info mr-1 has-text-right">
-                                            <i class="fas fa-edit"></i>
+                                    <!-- Actions: Edit and Delete -->
+                                    <div class="column is-flex is-justify-content-flex-end is-align-items-center">
+                                        <!-- Edit Button -->
+                                        <a href="{{ url_for('book.update', book_id=0) }}" class="button is-small is-info mr-2">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-edit"></i>
+                                            </span>
                                         </a>
-                                        <a href="#" class="button is-small is-danger has-text-right"
-                                           onclick="return confirm('Tem certeza que deseja excluir este livro?')">
-                                            <i class="fas fa-trash"></i> </a>
+
+                                        <!-- Delete Button -->
+                                        <form action="{{ url_for('book.delete', book_id=0) }}" method="post" class="inline">
+                                            <button type="submit" class="button is-small is-danger" onclick="return confirm('Tem certeza que deseja excluir este livro?')">
+                                                <span class="icon is-small">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </span>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </li>

@@ -7,26 +7,27 @@
 
 <div class="content">
   <div id="1">
-    <h3 class="subtitle is-5 has-text-weight-semibold mb-2">Book Details</h3>
-    <ul class="box">
-      <li class="mb-3">
-        <p class="has-text-weight-semibold"><strong>Author:</strong> {{ book.author }}</p>
-      </li>
-      <li class="mb-3">
-        <p class="has-text-weight-semibold"><strong>Genre:</strong> {{ book.genre }}</p>
-      </li>
-      <li class="mb-3">
-        <p class="has-text-weight-semibold"><strong>Published:</strong> {{ book.published_date }}</p>
-      </li>
-      <li class="mb-3">
-        <p class="has-text-weight-semibold"><strong>Description:</strong> {{ book.description }}</p>
-      </li>
-    </ul>
+    <h3 class="subtitle is-5 mb-4">Book Details</h3>
+    <div class="box p-5">
+      <div class="mb-4">
+        <p><strong>Author:</strong> {{ book.author }}</p>
+      </div>
+      <div class="mb-4">
+        <p><strong>Genre:</strong> {{ book.genre }}</p>
+      </div>
+      <div class="mb-4">
+        <p><strong>Published:</strong> {{ book.published_date }}</p>
+      </div>
+      <div class="mb-4">
+        <p><strong>Description:</strong> {{ book.description }}</p>
+      </div>
+    </div>
   </div>
 
-  <div class="buttons is-right mt-5">
+  <!-- Buttons -->
+  <div class="buttons is-flex is-justify-content-flex-end mt-5">
     <!-- Update -->
-    <a href="#" class="button is-small is-info mr-3">
+    <a href="{{ url_for('book.update', book_id=0) }}" class="button is-small is-info mr-2">
       <span class="icon is-small">
         <i class="fas fa-edit"></i>
       </span>
@@ -34,7 +35,7 @@
     </a>
 
     <!-- Delete -->
-    <form action="#" method="post" class="inline">
+    <form action="{{ url_for('book.delete', book_id=0) }}" method="post" class="inline mr-2">
       <button type="submit" class="button is-small is-danger" onclick="return confirm('Tem certeza que deseja excluir este livro?')">
         <span class="icon is-small">
           <i class="fas fa-trash-alt"></i>
@@ -44,7 +45,7 @@
     </form>
 
     <!-- Back -->
-    <a href="#" class="button is-small is-link">
+    <a href="{{ url_for('library.main', lib_id=0) }}" class="button is-small is-link">
       <span class="icon is-small">
         <i class="fas fa-arrow-left"></i>
       </span>

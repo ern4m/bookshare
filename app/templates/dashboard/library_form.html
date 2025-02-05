@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% if library %}Edit Library - {{ library.name }}{% else %}Create Library{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2 class="title is-4 mb-6">
+    {% if library %}Edit Library: {{ library.name }}{% else %}Create a New Library{% endif %}
+  </h2>
+
+  <div class="box p-5">
+    <form method="POST" action="{% if library %}{{ url_for('library.update', library_id=library.id) }}{% else %}{{ url_for('library.create') }}{% endif %}">
+      <!-- Library Name Field -->
+      <div class="field">
+        <label class="label">Library Name</label>
+        <div class="control">
+          <input class="input" type="text" name="name" value="{{ library.name if library else '' }}" required>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="field is-grouped mt-5">
+        <div class="control">
+          <button type="submit" class="button is-primary">
+            {% if library %}Save Changes{% else %}Create Library{% endif %}
+          </button>
+        </div>
+        {% if library %}
+        <div class="control">
+          <a href="{{ url_for('library.get', library_id=library.id) }}" class="button is-light">Cancel</a>
+        </div>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

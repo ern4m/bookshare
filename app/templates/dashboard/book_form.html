@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% if book %}Editar Livro - {{ book.title }}{% else %}Adicionar Livro{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2 class="title is-4 mb-6">
+    {% if book %}Editar Livro: {{ book.title }}{% else %}Adicionar Livro{% endif %}
+  </h2>
+
+  <div class="box p-5">
+    <form method="POST" action="{% if book %}{{ url_for('book.update', book_id=book.id) }}{% else %}{{ url_for('book.create') }}{% endif %}">
+      <!-- Title Field -->
+      <div class="field">
+        <label class="label">Título</label>
+        <div class="control">
+          <input class="input" type="text" name="title" value="{{ book.title if book else '' }}" required>
+        </div>
+      </div>
+
+      <!-- Author Field -->
+      <div class="field">
+        <label class="label">Autor</label>
+        <div class="control">
+          <input class="input" type="text" name="author" value="{{ book.author if book else '' }}" required>
+        </div>
+      </div>
+
+      <!-- Genre Field -->
+      <div class="field">
+        <label class="label">Genero</label>
+        <div class="control">
+          <input class="input" type="text" name="genre" value="{{ book.genre if book else '' }}" required>
+        </div>
+      </div>
+
+      <!-- Published Date Field -->
+      <div class="field">
+        <label class="label">Data de publicação</label>
+        <div class="control">
+          <input class="input" type="date" name="published_date" value="{{ book.published_date if book else '' }}" required>
+        </div>
+      </div>
+
+      <!-- Description Field -->
+      <div class="field">
+        <label class="label">Descrição</label>
+        <div class="control">
+          <textarea class="textarea" name="description" rows="5" required>{{ book.description if book else '' }}</textarea>
+        </div>
+      </div>
+
+      <!-- Is Lent Checkbox -->
+      <div class="field">
+        <label class="checkbox">
+          <input type="checkbox" name="is_lent" {% if book and book.is_lent %}checked{% endif %}>
+          Está emprestado?
+        </label>
+      </div>
+
+      <!-- Lending ID Field (Optional) -->
+      <div class="field">
+        <label class="label">ID do Empréstimo (Opcional)</label>
+        <div class="control">
+          <input class="input" type="number" name="lending_id" value="{{ book.lending_id if book and book.lending_id else '' }}">
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="field is-grouped mt-5">
+        <div class="control">
+          <button type="submit" class="button is-primary">
+            {% if book %}Alterar Mudanças{% else %}Adicionar Livro{% endif %}
+          </button>
+        </div>
+        {% if book %}
+        <div class="control">
+          <a href="{{ url_for('book.get', book_id=book.id) }}" class="button is-light">Cancelar</a>
+        </div>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

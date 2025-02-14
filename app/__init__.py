@@ -1,3 +1,4 @@
+import os
 from flask_login import LoginManager
 from flask import Flask
 from .models import db, User
@@ -31,5 +32,11 @@ def create_app():
     app.register_blueprint(book_blueprint, url_prefix='/book')
     app.register_blueprint(profile_blueprint, url_prefix='/profile')
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
+    
+    with app.app_context():
+        db_file = app.config["SQLALCHEMY_DATABASE_URI"].replace("sqlite:///", "")
+        if not os.path.exists(db_file):
+            db.create_all()
+            print("Database created successfully!")
 
     return app

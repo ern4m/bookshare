@@ -6,7 +6,7 @@
 <section class="section">
     <div class="container">
         <!-- Título da Biblioteca -->
-        <h2 class="title is-4 mb-6">{{ library_name }}</h2>
+        <h2 class="title is-4 mb-6">{{ library.name }}</h2>
 
         <div class="field columns">
             <div class="column is-10">
@@ -18,47 +18,43 @@
             </p>
             </div>
             <div class="column is-2">
-                <a href="{{ url_for('book.create') }}" class="button is-primary is-rounded ">
+                <a href="{{ url_for('book.create', library_id=library.id) }}" class="button is-primary is-rounded ">
                 <span class="icon">
                     <i class="fas fa-plus"></i>
                 </span>
                 <span>Adicionar Livro</span>
             </a>
             </div>
-
-
         </div>
-
-
 
         <!-- Grid para os Gêneros -->
         <div class="columns is-multiline">
-            {% for book in range(4) %}
+            {% for genre in books_by_genre %}
             <!-- Livros de Ficção -->
             <div class="column is-12">
-                <h3 class="subtitle is-5 has-text-weight-semibold">{{"Gênero tal"}}</h3>
+                <h3 class="subtitle is-5 has-text-weight-semibold">{{ genre[0]['genre'] }}</h3>
                 <div class="box">
                     <ul>
-                        {% for book in range(4) %}
-                        <a href="{{ url_for('book.get', book_id=0) }}">
+                        {% for book in genre %}
+                        <a href="{{ url_for('book.get', book_id=book.id) }}">
                             <li class="p-3 mb-3 box is-clickable">
                                 <div class="columns is-mobile is-vcentered ">
                                     <div class="column is-12">
-                                        <p class="has-text-weight-semibold">Título do Livro {{ book }}</p>
-                                        <p class="is-size-7 has-text-grey">Autor: Autor{{ book }}</p>
-                                        <p class="is-size-7 has-text-grey">Gênero: Ficção</p>
+                                        <p class="has-text-weight-semibold">{{ book.title }}</p>
+                                        <p class="is-size-7 has-text-grey"><b>Autor:</b> {{ book.author }}</p>
+                                        <!-- <p class="is-size-7 has-text-grey">Gênero: {{ book.genre }}</p> -->
                                     </div>
                                     <!-- Actions: Edit and Delete -->
                                     <div class="column is-flex is-justify-content-flex-end is-align-items-center">
                                         <!-- Edit Button -->
-                                        <a href="{{ url_for('book.update', book_id=0) }}" class="button is-small is-info mr-2">
+                                        <a href="{{ url_for('book.update', book_id=book.id) }}" class="button is-small is-info mr-2">
                                             <span class="icon is-small">
                                                 <i class="fas fa-edit"></i>
                                             </span>
                                         </a>
 
                                         <!-- Delete Button -->
-                                        <form action="{{ url_for('book.delete', book_id=0) }}" method="post" class="inline">
+                                        <form action="{{ url_for('book.delete', book_id=book.id) }}" method="post" class="inline">
                                             <button type="submit" class="button is-small is-danger" onclick="return confirm('Tem certeza que deseja excluir este livro?')">
                                                 <span class="icon is-small">
                                                     <i class="fas fa-trash-alt"></i>

@@ -11,7 +11,7 @@
   </h2>
 
   <div class="box p-5">
-    <form method="POST" action="{% if book %}{{ url_for('book.update', book_id=book.id) }}{% else %}{{ url_for('book.create') }}{% endif %}">
+    <form method="POST" action="{% if book %}{{ url_for('book.update', book_id=book.id) }}{% else %}{{ url_for('book.create', library_id=library_id) }}{% endif %}">
       <!-- Title Field -->
       <div class="field">
         <label class="label">Título</label>
@@ -65,6 +65,14 @@
         <label class="label">ID do Empréstimo (Opcional)</label>
         <div class="control">
           <input class="input" type="number" name="lending_id" value="{{ book.lending_id if book and book.lending_id else '' }}">
+        </div>
+      </div>
+
+      <!-- Library Id Field -->
+      <div class="field">
+        <label class="label">ID da Biblioteca (Opcional)</label>
+        <div class="control">
+          <input class="input" type="number" name="library_id" value="{{ book.library_id if book else '' }}">
         </div>
       </div>
 

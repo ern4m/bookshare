@@ -9,14 +9,25 @@
         <h2 class="title is-4 mb-6">{{ library.name }}</h2>
 
         <div class="field columns">
-            <div class="column is-10">
-                <p class="control has-icons-right ">
-                <input class="input is-rounded" type="text" placeholder="Busque por títulos, autores ou gênero.."/>
-                <span class="icon is-small is-right">
-                                <i class="fas fa-search"></i>
-                            </span>
-            </p>
-            </div>
+            <input class="input is-rounded" type="text" placeholder="Busque por títulos, autores ou gênero.." id="search" onkeyup="searchBooks()"/><script>
+            function searchBooks() {
+                const input = document.getElementById('search');
+                const filter = input.value.toLowerCase();
+                const bookItems = document.querySelectorAll('.box ul li');
+
+                bookItems.forEach(item => {
+                    const title = item.querySelector('.has-text-weight-semibold').textContent.toLowerCase();
+                    const author = item.querySelector('.is-size-7.has-text-grey').textContent.toLowerCase();
+                    const genre = item.closest('.column').querySelector('.subtitle').textContent.toLowerCase();
+
+                    if (title.includes(filter) || author.includes(filter) || genre.includes(filter)) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+            </script>
             <div class="column is-2">
                 <a href="{{ url_for('book.create', library_id=library.id) }}" class="button is-primary is-rounded ">
                 <span class="icon">

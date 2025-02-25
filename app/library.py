@@ -62,6 +62,15 @@ def update(library_id):
     
     return render_template('dashboard/library_form.html', library=mock_library)
 
+@library.route('/libraries')
+@login_required
+def libraries():
+    search_query = request.args.get('search', '')
+    if search_query:
+        libraries = Library.query.filter(Library.name.ilike(f'%{search_query}%')).all()
+    else:
+        libraries = Library.query.all()
+    return render_template('dashboard/libraries.html', libraries=libraries)
 ## Utils
 
 def get_books_grouped_by_genre(library_id):

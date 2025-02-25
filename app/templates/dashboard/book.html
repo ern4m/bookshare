@@ -3,23 +3,23 @@
 {% block title %}{{ book.title }}{% endblock %}
 
 {% block content %}
-<h2 class="title is-4 mb-6">{{ book.title }}</h2>
+<h2 class="title is-4 mb-6">Título: {{ book.title }}</h2>
 
 <div class="content">
   <div id="1">
-    <h3 class="subtitle is-5 mb-4">Book Details</h3>
+    <h3 class="subtitle is-5 mb-4">Detalhes do Livro</h3>
     <div class="box p-5">
       <div class="mb-4">
-        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Autor:</strong> {{ book.author }}</p>
       </div>
       <div class="mb-4">
-        <p><strong>Genre:</strong> {{ book.genre }}</p>
+        <p><strong>Gênero:</strong> {{ book.genre }}</p>
       </div>
       <div class="mb-4">
-        <p><strong>Published:</strong> {{ book.published_date }}</p>
+        <p><strong>Data de publicação:</strong> {{ book.published_date }}</p>
       </div>
       <div class="mb-4">
-        <p><strong>Description:</strong> {{ book.description }}</p>
+        <p><strong>Descrição:</strong> {{ book.description }}</p>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
       <span class="icon is-small">
         <i class="fas fa-edit"></i>
       </span>
-      <span>Edit</span>
+      <span>Editar</span>
     </a>
 
     <!-- Delete -->
@@ -40,7 +40,7 @@
         <span class="icon is-small">
           <i class="fas fa-trash-alt"></i>
         </span>
-        <span>Delete</span>
+        <span>Deletar</span>
       </button>
     </form>
 
@@ -49,7 +49,7 @@
       <span class="icon is-small">
         <i class="fas fa-arrow-left"></i>
       </span>
-      <span>Back</span>
+      <span>Voltar</span>
     </a>
   </div>
 </div>

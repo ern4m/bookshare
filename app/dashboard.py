@@ -15,7 +15,6 @@ def libraries():
     user = User.query.get(current_user.id)
 
     libraries = Library.query.filter_by(user_id=user.id).all()
-    print(libraries, user.id)
 
     return render_template('dashboard/libraries.html', libraries=libraries, username=user.username)
 

@@ -12,7 +12,7 @@ def login():
         password = request.form.get('password')
 
         user = User.query.filter_by(email=email).first()
-        print(user)
+
         if user and check_password_hash(user.password, password):
             login_user(user)
             flash('Logged in successfully!', 'success')

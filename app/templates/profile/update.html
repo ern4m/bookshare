@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Editar perfil
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2 class="title is-4 mb-6">
+    Editar perfil:
+  </h2>
+
+  <div class="box p-5">
+    <form method="POST" action="{{ url_for('profile.update') }}">
+
+      <div class="field">
+        <label class="label">Username</label>
+        <div class="control">
+          <input class="input" type="text" name="username" value="{{ user.username }}">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Nome</label>
+        <div class="control">
+          <input class="input" type="text" name="name" value="{{ user.name }}">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Sobrenome</label>
+        <div class="control">
+          <input class="input" type="text" name="lastname" value="{{ user.lastname }}">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input class="input" type="text" name="email" value="{{ user.email }}">
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="field is-grouped mt-5">
+        <div class="control">
+          <button type="submit" class="button is-primary">
+            Salvar
+          </button>
+        </div>
+
+        <div class="control">
+          <a href="{{ url_for('profile.main') }}" class="button is-light">Cancelar</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

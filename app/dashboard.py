@@ -31,8 +31,6 @@ def libraries():
 @login_required
 def borrowings():
 
-    print(current_user.id)
-
     lendings_as_lender = (
         db.session.query(
             Book.title.label("book_title"),
@@ -62,7 +60,5 @@ def borrowings():
         .filter(Lending.borrower_id == current_user.id)  # Filter by borrower_id
         .all()  # Fetch all results
     )
-
-    print(lendings_as_borrower,'\n', lendings_as_lender)
 
     return render_template('dashboard/borrowings.html', lendings=lendings_as_lender, borrowings=lendings_as_borrower)

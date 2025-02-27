@@ -17,7 +17,6 @@ def main():
 @login_required
 def update():
     user = User.query.get(current_user.id)
-    print(current_user)
     
     if request.method == "POST":
         # Get form data from the request

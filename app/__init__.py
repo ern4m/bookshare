@@ -11,6 +11,19 @@ from .library import library as library_blueprint
 from .book import book as book_blueprint
 from .profile import profile as profile_blueprint
 
+
+# Using this for database population
+from flask.cli import with_appcontext
+from .utils import db_populate
+import click
+
+@click.command("populate-db")
+@with_appcontext
+def populate_db_command():
+    db_populate.db_populate(db)
+    click.echo("Database populated successfully.")
+
+
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 
@@ -25,6 +38,7 @@ def create_app():
     # Initialize extensions
     db.init_app(app)
     login_manager.init_app(app)
+    app.cli.add_command(populate_db_command)
 
     app.register_blueprint(main_blueprint)
     app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h2 class="title is-4 mb-6">Perfil</h2>
+        <div class="box">
+            <div class="content">
+                <p><strong>Nome:</strong> {{ user.name }}</p>
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+            </div>
+            <div class="buttons is-flex is-justify-content-flex-end mt-4">
+                <a href="{{ url_for('profile.update') }}" class="button is-info is-light">
+                    <span class="icon">
+                        <i class="fas fa-user-edit"></i>
+                    </span>
+                    <span>Editar Perfil</span>
+                </a>
+                <a href="{{ url_for('profile.change_password') }}" class="button is-warning is-light">
+                    <span class="icon">
+                        <i class="fas fa-key"></i>
+                    </span>
+                    <span>Alterar Senha</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

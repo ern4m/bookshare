@@ -14,9 +14,10 @@ mock_library = {
 @library.route('/<int:lib_id>')
 @login_required
 def main(lib_id):
-    user = User.query.get(current_user.id)
+
     library = Library.query.get(lib_id)
     books = get_books_grouped_by_genre(library.id)
+    
     return render_template('dashboard/library.html', 
                             user_id=current_user.id,
                             library=library,

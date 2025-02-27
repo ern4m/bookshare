@@ -98,32 +98,3 @@ def db_populate(db):
     # Add books to the session
     db.session.add_all(books)
     db.session.commit()
-
-    # Create lending records
-    lendings = [
-        Lending(
-            book_id=books[0].id,
-            lender_id=users[0].id,
-            borrower_id=users[1].id,
-            lend_date=datetime(2023, 10, 1),
-            return_date=datetime(2023, 10, 15)
-        ),
-        Lending(
-            book_id=books[1].id,
-            lender_id=users[1].id,
-            borrower_id=users[2].id,
-            lend_date=datetime(2023, 10, 5),
-            return_date=None  # Book not yet returned
-        ),
-        Lending(
-            book_id=books[2].id,
-            lender_id=users[2].id,
-            borrower_id=users[0].id,
-            lend_date=datetime(2023, 10, 10),
-            return_date=datetime(2023, 10, 20)
-        )
-    ]
-
-    # Add lendings to the session
-    db.session.add_all(lendings)
-    db.session.commit()

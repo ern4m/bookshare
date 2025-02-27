@@ -1,7 +1,7 @@
 from datetime import datetime, date
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
-from .models import db, User, Lending, Book
+from .models import db, User, Library, Lending, Book
 
 book = Blueprint('book', __name__)
 
@@ -9,10 +9,25 @@ book = Blueprint('book', __name__)
 @login_required
 def get(book_id):
     user = User.query.get(current_user.id)
-    book = Book.query.get(book_id)
+    
+    # book = Book.query.get(book_id)
+    # Query to get the Book, Library, and User details
+    query = (
+        db.session.query(Book, Library.user_id)  # Select Book and Library.user_id
+        .join(Library, Book.library_id == Library.id)  # Join Book and Library on library_id
+        .filter(Book.id == book_id)  # Filter by the given book_id
+        .first()  # Fetch the first result (since book_id is unique)
+    )
 
+    if query:
+        book, owner_id = query
+        return render_template('dashboard/book.html', 
+                        user_id=user.id,
+                        owner_id=owner_id,
+                        book=book)
+    
     return render_template('dashboard/book.html', 
-                        username=user.username,
+                        user_id=user.id,
                         book=book)
 
 @book.route('/create/<int:library_id>', methods=['GET', 'POST'])

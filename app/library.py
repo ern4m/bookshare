@@ -18,7 +18,7 @@ def main(lib_id):
     library = Library.query.get(lib_id)
     books = get_books_grouped_by_genre(library.id)
     return render_template('dashboard/library.html', 
-                            username=user.username,
+                            user_id=current_user.id,
                             library=library,
                             books_by_genre=books)
     
@@ -26,7 +26,7 @@ def main(lib_id):
 @login_required
 def get(library_id):
     library = Library.query.get_or_404(library_id)
-    return render_template('dashboard/library_form.html', library=library)
+    return render_template('dashboard/library_form.html', library=library, user_id=current_user.id)
 
 @library.route('create', methods=['GET', 'POST'])
 @login_required

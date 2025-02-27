@@ -27,6 +27,7 @@
   <!-- Buttons -->
   <div class="buttons is-flex is-justify-content-flex-end mt-5">
     <!-- Update -->
+    {% if owner_id == user_id %}
     <a href="{{ url_for('book.update', book_id=book.id) }}" class="button is-small is-info mr-2">
       <span class="icon is-small">
         <i class="fas fa-edit"></i>
@@ -43,6 +44,7 @@
         <span>Deletar</span>
       </button>
     </form>
+    {% endif %}
 
     <!-- Back -->
     <a href="{{ url_for('library.main', lib_id=book.library_id) }}" class="button is-small is-link">

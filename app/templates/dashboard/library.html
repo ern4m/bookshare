@@ -56,6 +56,7 @@
                                         <!-- <p class="is-size-7 has-text-grey">Gênero: {{ book.genre }}</p> -->
                                     </div>
                                     <!-- Actions: Edit and Delete -->
+                                    {% if library.user_id == user_id %}
                                     <div class="column is-flex is-justify-content-flex-end is-align-items-center">
                                         <!-- Edit Button -->
                                         <a href="{{ url_for('book.update', book_id=book.id) }}" class="button is-small is-info mr-2">
@@ -73,6 +74,7 @@
                                             </button>
                                         </form>
                                     </div>
+                                    {% endif %}
                                 </div>
                             </li>
                         </a>

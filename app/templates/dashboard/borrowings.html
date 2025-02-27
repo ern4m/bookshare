@@ -17,23 +17,20 @@
                 <h3 class="subtitle is-5 has-text-weight-semibold">Meus livros emprestados</h3>
                 <div class="box">
                     <ul>
-                        {% for borrowing in range(4) %}
-                            <li class="media mb-5">
-                                <div class="media-content">
-                                    <p class="title is-6">{{ "Nome do livro" }}</p>
+                        {% for lending in lendings %}
+                        <li class="media mb-5">
+                            <div class="media-content">
+                                <a href="{{ url_for('book.get', book_id=lending[3]) }}">
+                                    <p class="title is-6">{{ lending[0] }}</p>
                                     <div class="columns">
                                         <div class="column is-10 ">
-                                        <p class=" is-size-7 has-text-grey">De: userX</p>
-                                    <p class=" is-size-7 has-text-grey">Data: dayX</p>
+                                            <p class=" is-size-7 has-text-grey">para: {{ lending[1] }}</p>
+                                            <p class=" is-size-7 has-text-grey">Data: {{ lending[2] }}</p>
+                                        </div>
                                     </div>
-                                        <div class="column is-2">
-
-
-                                    </div>
-                                    </div>
-
-                                </div>
-                            </li>
+                                </a>
+                            </div>
+                        </li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -43,25 +40,27 @@
             <div class="column">
                 <h3 class="subtitle is-5 has-text-weight-semibold">Livros de amigos</h3>
                 <div class="field has-addons">
-  <p class="control">
-    <input class="input" type="text" placeholder="Buscar livro">
-  </p>
-  <p class="control">
-    <a class="button is-static">
-      Pedir emprestado
-    </a>
-  </p>
-</div>
+                    <p class="control">
+                        <input class="input" type="text" placeholder="Buscar livro">
+                    </p>
+                    <p class="control">
+                        <a class="button is-static">
+                            Buscar
+                        </a>
+                    </p>
+                </div>
                 <div class="box">
                     <ul>
-                        {% for borrowing in range(4) %}
-                            <li class="media mb-4">
+                        {% for borrowing in borrowings %}
+                        <li class="media mb-4">
+                            <a href="{{ url_for('book.get', book_id=borrowing[3]) }}">
                                 <div class="media-content">
-                                    <p class="title is-6">{{ "Teste" }}</p>
-                                    <p class="subtitle is-7 has-text-grey">De: userX</p>
-                                    <p class="subtitle is-7 has-text-grey">Data: dayX</p>
+                                    <p class="title is-6">{{ borrowing[0] }}</p>
+                                    <p class="is-10 has-text-grey">de: {{ borrowing[1] }}</p>
+                                    <p class="is-10 has-text-grey">Data: {{ borrowing[2] }}</p>
                                 </div>
-                            </li>
+                            </a>
+                        </li>
                         {% endfor %}
                     </ul>
                 </div>

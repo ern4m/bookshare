@@ -27,6 +27,17 @@
   <!-- Buttons -->
   <div class="buttons is-flex is-justify-content-flex-end mt-5">
     <!-- Update -->
+    {% if (owner_id != user_id) %}
+    <form action="{{ url_for('book.borrow_book') }}" method="POST" class="inline mr-2">
+      <input type="hidden" name="book_id" value="{{ book.id }}">
+      <input type="hidden" name="borrower_id" value="{{ current_user.id }}">
+      {% if book.is_lent == 1 %}
+        <button type="submit" class="button is-small" disabled>Pedir empréstimo</button>
+      {% else %}
+        <button type="submit" class="button is-small">Pedir empréstimo</button>
+      {% endif %}
+    </form>
+    {% endif %}
     {% if owner_id == user_id %}
     <a href="{{ url_for('book.update', book_id=book.id) }}" class="button is-small is-info mr-2">
       <span class="icon is-small">

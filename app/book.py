@@ -88,6 +88,7 @@ def update(book_id):
     return render_template('dashboard/book_form.html', book=book)
 
 @book.route('/<int:book_id>/delete', methods=['POST'])
+@login_required
 def delete(book_id):
     # Fetch the book from the database
     book = Book.query.get_or_404(book_id)
@@ -101,3 +102,44 @@ def delete(book_id):
 
     # Redirect to the library page
     return redirect(url_for('library.main', lib_id=library_id))
+
+@book.route('/borrow_book', methods=['POST'])
+@login_required
+def borrow_book():
+    # Get form data from the request
+    book_id = request.form.get('book_id')
+    borrower_id = request.form.get('borrower_id')
+
+    # Validate data
+    if not all([book_id, borrower_id]):
+        return "Missing required fields", 400
+
+    # Getting owner_id 
+    owner_id = query = (
+        db.session.query(Library.user_id)\
+            .join(Book, Book.library_id == Library.id)\
+            .filter(Book.id == book_id)\
+            .first()
+    )
+        
+    # Create a new Lending record
+    new_lending = Lending(
+        book_id=book_id,
+        lender_id=owner_id[0],  # Assuming the lender is a fixed user (e.g., library admin)
+        borrower_id=borrower_id,
+        lend_date=datetime.utcnow(),  # Set the current time as the lend date
+        return_date=None  # Return date is initially None
+    )
+
+
+    # Updating book status to lent
+    book = Book.query.get(book_id)
+    
+    book.is_lent = 1
+    
+    # Add to the database
+    db.session.add(new_lending)
+    db.session.commit()
+
+    # Redirect to a success page or the same page
+    return redirect(url_for('dashboard.borrowings', book_id=book_id))

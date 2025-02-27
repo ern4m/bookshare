@@ -15,7 +15,7 @@ def libraries():
     user = User.query.get(current_user.id)
 
     others_libraries = Library.query\
-                            .filter(Library.user_id != user.id)\
+                            .filter(Library.user_id != current_user.id)\
                             .order_by(Library.created_at.desc())\
                             .limit(10)\
                             .all()
@@ -30,6 +30,39 @@ def libraries():
 @dashboard.route('/borrowings')
 @login_required
 def borrowings():
-    user = User.query.get(current_user.id)
 
-    return render_template('dashboard/borrowings.html', username=user.username)
+    print(current_user.id)
+
+    lendings_as_lender = (
+        db.session.query(
+            Book.title.label("book_title"),
+            User.username.label("borrower_username"),  # Borrower name
+            Lending.lend_date,               # Lend date
+            Book.id,
+            Lending.id.label("lending_id"),      # Lending ID
+            Lending.return_date,             # Return date
+        )
+        .join(Book, Lending.book_id == Book.id)
+        .join(User, Lending.borrower_id == User.id)  # Join for borrower
+        .filter(Lending.lender_id == current_user.id)  # Filter by lender_id
+        .all()  # Fetch all results
+    )
+    
+    lendings_as_borrower = (
+        db.session.query(
+            Book.title.label("book_title"),
+            User.username.label("lender_username"),   # Lender name
+            Lending.lend_date, # Lend date
+            Book.id,
+            Lending.id.label("lending_id"),  # Lending ID
+            Lending.return_date,             # Return date
+        )
+        .join(User, Lending.lender_id == User.id)  # Join for lender
+        .join(Book, Lending.book_id == Book.id)
+        .filter(Lending.borrower_id == current_user.id)  # Filter by borrower_id
+        .all()  # Fetch all results
+    )
+
+    print(lendings_as_borrower,'\n', lendings_as_lender)
+
+    return render_template('dashboard/borrowings.html', lendings=lendings_as_lender, borrowings=lendings_as_borrower)

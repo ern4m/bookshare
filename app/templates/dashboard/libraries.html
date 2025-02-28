@@ -11,14 +11,14 @@
             </div>
             <div class="column is-2">
                 <!-- Botão de Adicionar Nova Biblioteca -->
-        <div class="has-text-right ">
-            <a href="{{ url_for('library.create') }}" class="button is-primary is-rounded is-small">
-                <span class="icon">
-                    <i class="fas fa-plus"></i>
-                </span>
-                <span>Adicionar Biblioteca</span>
-            </a>
-        </div>
+                <div class="has-text-right">
+                    <a href="{{ url_for('library.create') }}" class="button is-primary is-rounded is-small">
+                        <span class="icon">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span>Adicionar Biblioteca</span>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="columns">
@@ -27,31 +27,16 @@
                 <h3 class="subtitle is-5 has-text-weight-semibold">Minhas bibliotecas</h3>
                 <div class="field">
                     <p class="control has-icons-right">
-                        <input class="input is-rounded" type="text" placeholder="Buscar" id="search" onkeyup="searchLibraries()"/>
+                        <input class="input is-rounded" type="text" placeholder="Buscar" id="search-user" onkeyup="searchLibraries('user')"/>
                         <span class="icon is-small is-right">
                             <i class="fas fa-search"></i>
                         </span>
                     </p>
-                </div><script>
-                function searchLibraries() {
-                    const input = document.getElementById('search');
-                    const filter = input.value.toLowerCase();
-                    const libraryBoxes = document.querySelectorAll('.box');
-
-                    libraryBoxes.forEach(box => {
-                        const title = box.querySelector('.title').textContent.toLowerCase();
-                        if (title.includes(filter)) {
-                            box.style.display = '';
-                        } else {
-                            box.style.display = 'none';
-                        }
-                    });
-                }
-                </script>
+                </div>
                 <div class="columns is-multiline">
                     {% for library in libraries %}
                     <div class="column is-half">
-                        <div class="box has-shadow">
+                        <div class="box has-shadow user">
                             <a href="{{ url_for('library.main', lib_id=library.id) }}">
                                 <h5 class="title is-6">{{ library.name }}</h5>
                                 <p class="content is-small">de: {{ username }}</p>
@@ -66,18 +51,17 @@
             <div class="column">
                 <h3 class="subtitle is-5 has-text-weight-semibold">Bibliotecas de outros</h3>
                 <div class="field">
-                        <p class="control has-icons-right">
-                            <input class="input is-rounded" type="text" placeholder="Buscar"/>
-                            <span class="icon is-small is-right">
-                                <i class="fas fa-search"></i>
-                            </span>
-                        </p>
-                    </div>
+                    <p class="control has-icons-right">
+                        <input class="input is-rounded" type="text" placeholder="Buscar" id="search-others" onkeyup="searchLibraries('others')"/>
+                        <span class="icon is-small is-right">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </p>
+                </div>
                 <div class="columns is-multiline">
-
                     {% for library in others_libraries %}
                     <div class="column is-12">
-                        <div class="box has-shadow">
+                        <div class="box has-shadow others">
                             <a href="{{ url_for('library.main', lib_id=library.id) }}">
                                 <h5 class="title is-6">{{ library.name }}</h5>
                                 <p class="content is-small">Descrição: {{ library.description }}</p>
@@ -88,23 +72,23 @@
                 </div>
             </div>
         </div>
-
-<!--         Loop de Bibliotecas
-        <div class="columns is-multiline">
-            {% for library in libraries %}
-            <div class="column is-one-third">
-                <div class="box has-shadow">
-                    <h5 class="title is-6">{{ library.name }}</h5>
-                    <p class="content is-small">Livros: {{ library.books|length }}</p>
-                    <a href="/library/{{ library.id }}" class="button is-dark is-small mt-2">
-                        Ver Biblioteca
-                    </a>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
- -->
-
     </div>
 </section>
+
+<script>
+function searchLibraries(type) {
+    const input = document.getElementById(`search-${type}`);
+    const filter = input.value.toLowerCase();
+    const libraryBoxes = document.querySelectorAll(`.box.${type}`);
+
+    libraryBoxes.forEach(box => {
+        const title = box.querySelector('.title').textContent.toLowerCase();
+        if (title.includes(filter)) {
+            box.style.display = '';
+        } else {
+            box.style.display = 'none';
+        }
+    });
+}
+</script>
 {% endblock %}

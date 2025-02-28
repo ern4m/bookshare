@@ -12,10 +12,8 @@
 </head>
 <body>
 <section class="section is-relative is-clipped">
-    <div class="is-hidden-touch has-background-primary"
-         style="position: absolute; top: 0; left: 0; width: 70%; height: 100%"></div>
-    <div class="is-hidden-desktop has-background-primary is-fullwidth"
-         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"></div>
+    <div class="is-hidden-touch has-background-info is-fullheight" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"></div>
+    <div class="is-hidden-desktop has-background-info is-fullwidth" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"></div>
     <div class="container mx-auto is-relative ">
         <div class="is-vcentered columns is-multiline">
             <div class="column is-6 is-5-desktop mb-5">
@@ -29,7 +27,7 @@
                     </p>
                     <p class="has-text-white mb-0">
                         Democratize o acesso à leitura e fortaleça laços compartilhando seus livros.
-                        <a  class="has-text-weight-bold" href="{{ url_for('auth.register') }}">Cadastre-se já!</a></p>
+                        <a class="has-text-weight-bold has-text-warning" href="{{ url_for('auth.register') }}">Cadastre-se já!</a></p>
                 </div>
             </div>
             <div class="column is-6 is-4-desktop mx-auto">
@@ -46,22 +44,22 @@
                                 <input class="input" type="password" name="password" placeholder="Senha" required>
                             </div>
                         </div>
-                        <button class="button is-primary mb-4 is-fullwidth" type="submit">Entrar</button>
-                        <a class="mb-4 is-inline-block" href="#"><small>Esqueceu a senha?</small></a>
-                        <a class="button is-white mb-2 is-flex is-justify-content-center is-align-items-center is-fullwidth"
-                           href="#">
-                            <span class="icon is-medium">
-                                <i class="fa-brands fa-github"></i>
-                            </span>
-                            <span class="has-text-grey-dark">Entre com @redesocial</span>
-                        </a>
-                        <a class="button is-white mb-2 is-flex is-justify-content-center is-align-items-center is-fullwidth"
-                           href="#">
-                            <span class="icon is-medium">
-                                <i class="fa-brands fa-google"></i>
-                            </span>
-                            <span class="has-text-grey-dark">Entre com @redesocial</span>
-                        </a>
+                        <button class="button has-background-info has-text-white mb-4 is-fullwidth" type="submit">Entrar</button>
+<!--                        <a class="mb-4 is-inline-block" href="#"><small>Esqueceu a senha?</small></a>-->
+<!--                        <a class="button is-white mb-2 is-flex is-justify-content-center is-align-items-center is-fullwidth"-->
+<!--                           href="#">-->
+<!--                            <span class="icon is-medium">-->
+<!--                                <i class="fa-brands fa-github"></i>-->
+<!--                            </span>-->
+<!--                            <span class="has-text-grey-dark">Entre com @redesocial</span>-->
+<!--                        </a>-->
+<!--                        <a class="button is-white mb-2 is-flex is-justify-content-center is-align-items-center is-fullwidth"-->
+<!--                           href="#">-->
+<!--                            <span class="icon is-medium">-->
+<!--                                <i class="fa-brands fa-google"></i>-->
+<!--                            </span>-->
+<!--                            <span class="has-text-grey-dark">Entre com @redesocial</span>-->
+<!--                        </a>-->
                     </form>
                 </div>
             </div>
